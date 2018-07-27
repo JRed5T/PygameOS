@@ -1,5 +1,0 @@
-show|logo.png|(0,0)
-show|top art.png|(0,200)
-show|all art.png|(0,400)
-goto|(0,200)|(600,200)|True|Pixels.pygos/Top Art
-goto|(0,400)|(600,200)|True|Pixels.pygos/All Art
