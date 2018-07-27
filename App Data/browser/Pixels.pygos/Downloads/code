@@ -1,0 +1,2 @@
+print|Error: Page does not download objects
+goto|(0,0)|(600,600)|False|Pixels.pygos
