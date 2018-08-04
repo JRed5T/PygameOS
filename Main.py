@@ -194,38 +194,14 @@ while running:
             # Saving
             # Pixlr
             if screen == "Pixlr":
-                if editfile == "":
-                    os.chdir(FilesPath)
-                    file = open("files","r")
-                    file.seek(0)
-                    numbersoffiles = len(file.read().split())
-                    file.close()
-                    filename = str(str(numbersoffiles + 1))
-                    file = open(filename,"w")
-                    file.write("Pixlr")
-                    for x in color:
-                        file.write("\n")
-                        file.write(str(x))
-                    editfile = str(numbersoffiles + 1)
-                    file.close()
-                    file = open("files","r")
-                    file.seek(0)
-                    text = file.read()
-                    file.close()
-                    file = open("files","w")
-                    file.write(text)
-                    if len(text.split()) != 0:
-                        file.write(" ")
-                    file.write(editfile)
-                else:
-                    os.chdir(FilesPath)
-                    filename = str(editfile)
-                    file = open(filename,"w")
-                    file.write("Pixlr")
-                    for x in color:
-                        file.write("\n")
-                        file.write(str(x))
-                    file.close()
+                os.chdir(FilesPath)
+                filename = str(editfile)
+                file = open(filename,"w")
+                file.write("Pixlr")
+                for x in color:
+                    file.write("\n")
+                    file.write(str(x))
+                file.close()
 
     # All Pre-Draw Screen Things
     # Veriable Settings
@@ -509,11 +485,12 @@ while running:
                     listerer = (x,color[x])
                     history.append(listerer)
                     if tool == "Basic":
-                        color[x] = pixlr_colorchange
+                        if color[x] != pixlr_colorchange:
+                            color[x] = list(pixlr_colorchange)
+                            history.append([x,list(pixlr_colorchange)])
                     if tool == "Colordropper":
                         pixlr_colorchange = color[x]
                     if tool == "Mixer":
-                        history.append()
                         colors = []
                         if (pos[x][0]+150,pos[x][1]) in pos:
                             colors.append(color[x+1])
@@ -533,7 +510,9 @@ while running:
                             changeing += y[1]
                             changeinb += y[2]
 
-                        color[x] = [int(changeinr/len(colors)),int(changeing/len(colors)),int(changeinb/len(colors))]
+                        if color[x] != [int(changeinr/len(colors)),int(changeing/len(colors)),int(changeinb/len(colors))]:
+                            color[x] = [int(changeinr/len(colors)),int(changeing/len(colors)),int(changeinb/len(colors))]
+                            history.append([x,[int(changeinr/len(colors)),int(changeing/len(colors)),int(changeinb/len(colors))]])
         # r
         if buttons_pressed[114] == True:
             pixlr_colorchange[0] = int(popup("What new red value do you want?")) 
@@ -546,7 +525,7 @@ while running:
         # a
         if buttons_pressed[97] == True:
             pixlr_colorchange = popup("What new color values do you want?")
-            pixlr_colors = ("red","green","blue","white","black","yellow","cyan","pink","silver","grey","maroon","purple","teal","navy","gold","urquoise","chocolate","tan","lavender","ivory","honeydew","orange")
+            pixlr_colors = ("red","green","blue","white","black","yellow","cyan","pink","silver","grey","maroon","purple","teal","navy","gold","turquoise","chocolate","tan","lavender","ivory","honeydew","orange")
             pixlr_colorchanges = [[255,0,0],[0,255,0],[0,0,255],[255,255,255],[0,0,0],[255,255,0],[0,255,255],[255,0,255],[192,192,192],[128,128,128],[128,0,0],[128,0,128],[0,128,128],[0,0,128],[255,215,0],[64,224,208],[210,105,30],[210,180,140],[230,230,250],[255,255,240],[240,255,240],[255,165,0]]
             if pixlr_colorchange in pixlr_colors:
                 loope = 0
@@ -571,15 +550,15 @@ while running:
         # m
         if buttons_pressed[109] == True:
             tool = "Mixer"
-        # z and Left Shift
-        if buttons_pressed[122] == True and buttons_pressed[304] == True and len(history) > 0:
+        # z
+        if buttons_pressed[122] == True and len(history) > 0:
             color[history[len(history)-1][0]] = history[len(history)-1][1]
             lister = []
             for y in range(len(history)-1):
                 lister.append(history[y])
             history = lister
-        # s and Left Shift
-        if buttons_pressed[115] == True and buttons_pressed[304] == True:
+        # s
+        if buttons_pressed[115] == True:
             if editfile == "":
                 os.chdir(FilesPath)
                 filename = popup("What is the file name?")
@@ -601,8 +580,8 @@ while running:
                     file.write("\n")
                     file.write(str(x))
                 file.close()
-        # q and Left Shift
-        if buttons_pressed[113] == True and buttons_pressed[304] == True:
+        # q
+        if buttons_pressed[113] == True:
             if editfile == "":
                 os.chdir(FilesPath)
                 file = open("files","r")
