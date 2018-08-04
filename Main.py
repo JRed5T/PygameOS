@@ -584,28 +584,17 @@ while running:
         if buttons_pressed[113] == True:
             if editfile == "":
                 os.chdir(FilesPath)
-                file = open("files","r")
-                file.seek(0)
-                numbersoffiles = len(file.read().split())
-                file.close()
-                filename = str(str(numbersoffiles + 1))
-                file = open(filename,"w")
+                filename = popup("What is the file name?")
+                while os.path.isdir(FilesPath+"/"+filename):
+                    filename = popup("What is the file name?")
+                file = open(filename,"w+")
                 file.write("Pixlr")
                 for x in color:
                     file.write("\n")
                     file.write(str(x))
-                editfile = str(numbersoffiles + 1)
+                editfile = filename
                 file.close()
-                file = open("files","r")
-                file.seek(0)
-                text = file.read()
-                file.close()
-                file = open("files","w")
-                file.write(text)
-                if len(text.split()) != 0:
-                    file.write(" ")
-                file.write(editfile)
-                file.close()
+                screen = "Home"
             else:
                 os.chdir(FilesPath)
                 filename = str(editfile)
@@ -615,7 +604,8 @@ while running:
                     file.write("\n")
                     file.write(str(x))
                 file.close()
-            screen = "Home"
+                screen = "Home"
+                
         # Curser Setting
         os.chdir(AppDataPath+"/pixlr")
         if tool == "Basic":
