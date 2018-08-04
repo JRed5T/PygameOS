@@ -6,13 +6,38 @@ import random
 import sys
 import googletrans
 
-account = input("Which account do you want? (1-5)")
+homepath = os.getcwd()
+
+account = input("Which account do you want? new for new account")
+
+#Creating a new account
+if account == "new":
+    newaccountname = input("What is the new account name?")
+if account == "new" and os.path.isdir(os.getcwd() + "/Files/" + newaccountname) == False:
+    UserPath = os.getcwd() + "/Files/" + newaccountname
+    os.mkdir(UserPath)
+    os.mkdir(UserPath+"/Files")
+    os.mkdir(UserPath+"/Settings")
+    os.chdir(UserPath)
+    langforcreate = input("What language do you speak (Google Translate Code)?")
+    file = open("Settings/setup","w+")
+    file.write("f")
+    file.close()
+    file = open("Settings/lang","w+")
+    file.write(langforcreate)
+    file.close()
+elif account == "new":
+    print("That Account Exists, Opening It Now.")
+if account == "new":
+    account=newaccountname
+else:
+    if os.path.isdir(os.getcwd() + "/Files/" + account) == False:
+        sys.exit("That account does not exist.")
 
 # Pathways
-homepath = os.getcwd()
 AppDataPath = homepath + "/App Data"
-FilesPath = homepath + "/Files/User"+account+"/Files"
-SettingsPath = homepath + "/Files/User"+account+"/Settings"
+FilesPath = homepath + "/Files/"+account+"/Files"
+SettingsPath = homepath + "/Files/"+account+"/Settings"
 
 # Logging in
 os.chdir(SettingsPath)
@@ -51,20 +76,20 @@ if loaded =="t":
 elif loaded == "f":
     username = input(translator.translate("What do you want your username to be?",dest=lang).text)
     password = input(translator.translate("What do you want your password to be?",dest=lang).text)
-    file = open("username","w")
-    file.seek(0)
+    file = open("username","w+")
     file.write(username)
     file.close()
-    file = open("password","w")
-    file.seek(0)
+    file = open("password","w+")
     file.write(password)
+    file.close()
+    file = open("backnum","w+")
+    file.write("1")
     file.close()
     file = open("setup","w")
     file.seek(0)
     file.write("t")
     file.close()
-    print(translator.translate("You will have to restart the program to log in.",dest=lang).text)
-    running = False
+    sys.exit(translator.translate("You will have to restart the program to log in.",dest=lang).text)
 
 # Initalizing and Setting Up Pygame
 pygame.init()
