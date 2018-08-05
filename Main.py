@@ -26,6 +26,9 @@ if account == "new" and os.path.isdir(os.getcwd() + "/Files/" + newaccountname) 
     file = open("Settings/lang","w+")
     file.write(langforcreate)
     file.close()
+    file = open("Settings/desktopviewmode","w+")
+    file.write("1")
+    file.close()
 elif account == "new":
     print("That Account Exists, Opening It Now.")
 if account == "new":
@@ -193,7 +196,7 @@ while running:
             running = False
             # Saving
             # Pixlr
-            if screen == "Pixlr":
+            if screen == "Pixlr" and editfile != "":
                 os.chdir(FilesPath)
                 filename = str(editfile)
                 file = open(filename,"w")
@@ -286,86 +289,108 @@ while running:
     if screen == "Files":
         pygame.mouse.set_cursor(*pygame.cursors.arrow)
         blocks = ((100,100),(250,100),(400,100),(100,250),(250,250),(400,250),(100,400),(250,400),(400,400))
-        pygame.display.set_caption("Files - Screen "+str(level))
         background(backpic)
         os.chdir(AppDataPath+"/universal")
         back_arrow = pygame.image.load("Back Arrow.png")
         os.chdir(AppDataPath+"/files")
         back = pygame.image.load("back.png")
         next_arrow = pygame.image.load("next.png")
-        file = pygame.image.load("file.png")
+        fileimg = pygame.image.load("file.png")
+        folderimg = pygame.image.load("folder.png")
         os.chdir(FilesPath)
         listy = os.listdir(FilesPath)
+        # Desktop Sort Program
+        os.chdir(SettingsPath)
+        file = open("desktopviewmode","r")
+        file.seek(0)
+        viewmode = int(file.read())
+        file.close()
+        if viewmode == 1:
+            listy.sort()
+        os.chdir(FilesPath)
         numoffiles = len(listy)
         window.blit(back_arrow,(100,100))
         window.blit(back,(100,250))
         window.blit(next_arrow,(400,250))
         # File Stuff
         if level * 6 - 5 <= numoffiles:
-            lines = openfile(listy[level * 6 - 6])
-            if lines[0] == "Pixlr":
+            if listy[level * 6 - 6].endswith("pixl"):
+                lines = openfile(listy[level * 6 - 6])
                 pos = ((0,0),(75,0),(150,0),(225,0),(300,0),(375,0),(450,0),(525,0),(0,75),(75,75),(150,75),(225,75),(300,75),(375,75),(450,75),(525,75),(0,150),(75,150),(150,150),(225,150),(300,150),(375,150),(450,150),(525,150),(0,225),(75,225),(150,225),(225,225),(300,225),(375,225),(450,225),(525,225),(0,300),(75,300),(150,300),(225,300),(300,300),(375,300),(450,300),(525,300),(0,375),(75,375),(150,375),(225,375),(300,375),(375,375),(450,375),(525,375),(0,450),(75,450),(150,450),(225,450),(300,450),(375,450),(450,450),(525,450),(0,525),(75,525),(150,525),(225,525),(300,525),(375,525),(450,525),(525,525))
                 color = [[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0]]
                 for x in range(64):
                     color[x] = ast.literal_eval(lines[x + 1])
                 for x in range(64):
                     pygame.draw.rect(window,color[x],(blocks[1][0]+(pos[x][0]/6),blocks[1][1]+(pos[x][1]/6),(100/8),100/8))
+            elif os.path.isdir(listy[level * 6 - 6]):
+                window.blit(folderimg,blocks[1])
             else:
-                window.blit(file,blocks[1])
+                window.blit(fileimg,blocks[1])
         if level * 6 - 4 <= numoffiles:
-            lines = openfile(listy[level * 6 - 5])
-            if lines[0] == "Pixlr":
+            if listy[level * 6 - 5].endswith("pixl"):
+                lines = openfile(listy[level * 6 - 5])
                 pos = ((0,0),(75,0),(150,0),(225,0),(300,0),(375,0),(450,0),(525,0),(0,75),(75,75),(150,75),(225,75),(300,75),(375,75),(450,75),(525,75),(0,150),(75,150),(150,150),(225,150),(300,150),(375,150),(450,150),(525,150),(0,225),(75,225),(150,225),(225,225),(300,225),(375,225),(450,225),(525,225),(0,300),(75,300),(150,300),(225,300),(300,300),(375,300),(450,300),(525,300),(0,375),(75,375),(150,375),(225,375),(300,375),(375,375),(450,375),(525,375),(0,450),(75,450),(150,450),(225,450),(300,450),(375,450),(450,450),(525,450),(0,525),(75,525),(150,525),(225,525),(300,525),(375,525),(450,525),(525,525))
                 color = [[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0]]
                 for x in range(64):
                     color[x] = ast.literal_eval(lines[x + 1])
                 for x in range(64):
                     pygame.draw.rect(window,color[x],(blocks[2][0]+(pos[x][0]/6),blocks[2][1]+(pos[x][1]/6),(100/8),100/8))
+            elif os.path.isdir(listy[level * 6 - 5]):
+                window.blit(folderimg,blocks[2])
             else:
-                window.blit(file,blocks[2])
+                window.blit(fileimg,blocks[2])
         if level * 6 - 3 <= numoffiles:
-            lines = openfile(listy[level * 6 - 4])
-            if lines[0] == "Pixlr":
+            if listy[level * 6 - 4].endswith("pixl"):
+                lines = openfile(listy[level * 6 - 4])
                 pos = ((0,0),(75,0),(150,0),(225,0),(300,0),(375,0),(450,0),(525,0),(0,75),(75,75),(150,75),(225,75),(300,75),(375,75),(450,75),(525,75),(0,150),(75,150),(150,150),(225,150),(300,150),(375,150),(450,150),(525,150),(0,225),(75,225),(150,225),(225,225),(300,225),(375,225),(450,225),(525,225),(0,300),(75,300),(150,300),(225,300),(300,300),(375,300),(450,300),(525,300),(0,375),(75,375),(150,375),(225,375),(300,375),(375,375),(450,375),(525,375),(0,450),(75,450),(150,450),(225,450),(300,450),(375,450),(450,450),(525,450),(0,525),(75,525),(150,525),(225,525),(300,525),(375,525),(450,525),(525,525))
                 color = [[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0]]
                 for x in range(64):
                     color[x] = ast.literal_eval(lines[x + 1])
                 for x in range(64):
                     pygame.draw.rect(window,color[x],(blocks[4][0]+(pos[x][0]/6),blocks[4][1]+(pos[x][1]/6),(100/8),100/8))
+            elif os.path.isdir(listy[level * 6 - 4]):
+                window.blit(folderimg,blocks[4])
             else:
-                window.blit(file,blocks[4])
+                window.blit(fileimg,blocks[4])
         if level * 6 - 2 <= numoffiles:
-            lines = openfile(listy[level * 6 - 3])
-            if lines[0] == "Pixlr":
+            if listy[level * 6 - 3].endswith("pixl"):
+                lines = openfile(listy[level * 6 - 3])
                 pos = ((0,0),(75,0),(150,0),(225,0),(300,0),(375,0),(450,0),(525,0),(0,75),(75,75),(150,75),(225,75),(300,75),(375,75),(450,75),(525,75),(0,150),(75,150),(150,150),(225,150),(300,150),(375,150),(450,150),(525,150),(0,225),(75,225),(150,225),(225,225),(300,225),(375,225),(450,225),(525,225),(0,300),(75,300),(150,300),(225,300),(300,300),(375,300),(450,300),(525,300),(0,375),(75,375),(150,375),(225,375),(300,375),(375,375),(450,375),(525,375),(0,450),(75,450),(150,450),(225,450),(300,450),(375,450),(450,450),(525,450),(0,525),(75,525),(150,525),(225,525),(300,525),(375,525),(450,525),(525,525))
                 color = [[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0]]
                 for x in range(64):
                     color[x] = ast.literal_eval(lines[x + 1])
                 for x in range(64):
                     pygame.draw.rect(window,color[x],(blocks[6][0]+(pos[x][0]/6),blocks[6][1]+(pos[x][1]/6),(100/8),100/8))
+            elif os.path.isdir(listy[level * 6 - 3]):
+                window.blit(folderimg,blocks[6])
             else:
-                window.blit(file,blocks[6])
+                window.blit(fileimg,blocks[6])
         if level * 6 - 1 <= numoffiles:
-            lines = openfile(listy[level * 6 - 2])
-            if lines[0] == "Pixlr":
+            if listy[level * 6 - 2].endswith("pixl"):
+                lines = openfile(listy[level * 6 - 2])
+                pos = ((0,0),(75,0),(150,0),(225,0),(300,0),(375,0),(450,0),(525,0),(0,75),(75,75),(150,75),(225,75),(300,75),(375,75),(450,75),(525,75),(0,150),(75,150),(150,150),(225,150),(300,150),(375,150),(450,150),(525,150),(0,225),(75,225),(150,225),(225,225),(300,225),(375,225),(450,225),(525,225),(0,300),(75,300),(150,300),(225,300),(300,300),(375,300),(450,300),(525,300),(0,375),(75,375),(150,375),(225,375),(300,375),(375,375),(450,375),(525,375),(0,450),(75,450),(150,450),(225,450),(300,450),(375,450),(450,450),(525,450),(0,525),(75,525),(150,525),(225,525),(300,525),(375,525),(450,525),(525,525))
                 color = [[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0]]
                 for x in range(64):
                     color[x] = ast.literal_eval(lines[x + 1])
                 for x in range(64):
                     pygame.draw.rect(window,color[x],(blocks[7][0]+(pos[x][0]/6),blocks[7][1]+(pos[x][1]/6),(100/8),100/8))
+            elif os.path.isdir(listy[level * 6 - 2]):
+                window.blit(folderimg,blocks[7])
             else:
-                window.blit(file,blocks[7])
+                window.blit(fileimg,blocks[7])
         if level * 6 - 0 <= numoffiles:
-            lines = openfile(listy[level * 6 - 1])
-            if lines[0] == "Pixlr":
+            if listy[level * 6 - 1].endswith("pixl"):
+                lines = openfile(listy[level * 6 - 1])
                 pos = ((0,0),(75,0),(150,0),(225,0),(300,0),(375,0),(450,0),(525,0),(0,75),(75,75),(150,75),(225,75),(300,75),(375,75),(450,75),(525,75),(0,150),(75,150),(150,150),(225,150),(300,150),(375,150),(450,150),(525,150),(0,225),(75,225),(150,225),(225,225),(300,225),(375,225),(450,225),(525,225),(0,300),(75,300),(150,300),(225,300),(300,300),(375,300),(450,300),(525,300),(0,375),(75,375),(150,375),(225,375),(300,375),(375,375),(450,375),(525,375),(0,450),(75,450),(150,450),(225,450),(300,450),(375,450),(450,450),(525,450),(0,525),(75,525),(150,525),(225,525),(300,525),(375,525),(450,525),(525,525))
                 color = [[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0]]
                 for x in range(64):
                     color[x] = ast.literal_eval(lines[x + 1])
                 for x in range(64):
                     pygame.draw.rect(window,color[x],(blocks[8][0]+(pos[x][0]/6),blocks[8][1]+(pos[x][1]/6),(100/8),100/8))
+            elif os.path.isdir(listy[level * 6 - 1]):
+                window.blit(folderimg,blocks[8])
             else:
-                window.blit(file,blocks[8])
+                window.blit(fileimg,blocks[8])
         if mouseclicks[0] == True and mousepos[0] >= 100 and mousepos[0] <= 200 and mousepos[1] >= 100 and mousepos[1] <= 200 and rest == False:
             screen = "Home"
             rest = True
@@ -381,7 +406,7 @@ while running:
                 rest = True
                 pygame.time.wait(100)
         if mouseclicks[0] == True and mousepos[0] >= 250 and mousepos[0] <= 350 and mousepos[1] >= 100 and mousepos[1] <= 200 and rest == False:
-            if level * 6 - 5 <= numoffiles:
+            if level * 6 - 5 <= numoffiles and listy[level * 6 - 6].endswith("~") == False and os.path.isdir(listy[level * 6 - 6]) == False:
                 lines = openfile(listy[level * 6 - 6])
                 screen = lines[0]
                 editfile = str(listy[level * 6 - 6])
@@ -389,7 +414,7 @@ while running:
                 rest = True
                 pygame.time.wait(100)
         if mouseclicks[0] == True and mousepos[0] >= 400 and mousepos[0] <= 500 and mousepos[1] >= 100 and mousepos[1] <= 200 and rest == False:
-            if level * 6 - 4 <= numoffiles:
+            if level * 6 - 4 <= numoffiles and listy[level * 6 - 5].endswith("~") == False and os.path.isdir(listy[level * 6 - 5]) == False:
                 lines = openfile(listy[level * 6 - 5])
                 screen = lines[0]
                 editfile = str(listy[level * 6 - 5])
@@ -397,7 +422,7 @@ while running:
                 rest = True
                 pygame.time.wait(100)
         if mouseclicks[0] == True and mousepos[0] >= 250 and mousepos[0] <= 350 and mousepos[1] >= 250 and mousepos[1] <= 350 and rest == False:
-            if level * 6 - 3 <= numoffiles:
+            if level * 6 - 3 <= numoffiles and listy[level * 6 - 4].endswith("~") == False and os.path.isdir(listy[level * 6 - 4]) == False:
                 lines = openfile(listy[level * 6 - 4])
                 screen = lines[0]
                 editfile = str(listy[level * 6 - 4])
@@ -405,15 +430,15 @@ while running:
                 rest = True
                 pygame.time.wait(100)
         if mouseclicks[0] == True and mousepos[0] >= 100 and mousepos[0] <= 200 and mousepos[1] >= 400 and mousepos[1] <= 500 and rest == False:
-            if level * 6 - 2 <= numoffiles:
+            if level * 6 - 2 <= numoffiles and listy[level * 6 - 3].endswith("~") == False and os.path.isdir(listy[level * 6 - 3]) == False:
                 lines = openfile(listy[level * 6 - 3])
                 screen = lines[0]
-                editfile = str(level * 6 - 2)
+                editfile = str(listy[level * 6 - 3])
                 loaded = False
                 rest = True
                 pygame.time.wait(100)
         if mouseclicks[0] == True and mousepos[0] >= 250 and mousepos[0] <= 350 and mousepos[1] >= 400 and mousepos[1] <= 500 and rest == False:
-            if level * 6 - 1 <= numoffiles:
+            if level * 6 - 1 <= numoffiles and listy[level * 6 - 2].endswith("~") == False and os.path.isdir(listy[level * 6 - 2]) == False:
                 lines = openfile(listy[level * 6 - 2])
                 screen = lines[0]
                 editfile = str(listy[level * 6 - 2])
@@ -421,13 +446,38 @@ while running:
                 rest = True
                 pygame.time.wait(100)
         if mouseclicks[0] == True and mousepos[0] >= 400 and mousepos[0] <= 500 and mousepos[1] >= 400 and mousepos[1] <= 500 and rest == False:
-            if level * 6 <= numoffiles:
+            if level * 6 <= numoffiles and listy[level * 6 - 1].endswith("~") == False and os.path.isdir(listy[level * 6 - 1]) == False:
                 lines = openfile(listy[level * 6 - 1])
                 screen = lines[0]
                 editfile = str(listy[level * 6 - 1])
                 loaded = False
                 rest = True
                 pygame.time.wait(100)
+        # Sets Screen Name
+        if mousepos[0] >= 100 and mousepos[0] <= 200 and mousepos[1] >= 100 and mousepos[1] <= 200:
+            hovername = "Back"
+        elif mousepos[0] >= 400 and mousepos[0] <= 500 and mousepos[1] >= 250 and mousepos[1] <= 350:
+            hovername = "Next Page"
+        elif mousepos[0] >= 100 and mousepos[0] <= 200 and mousepos[1] >= 250 and mousepos[1] <= 350:
+            hovername = "Last Page"
+        elif mousepos[0] >= 250 and mousepos[0] <= 350 and mousepos[1] >= 100 and mousepos[1] <= 200 and level * 6 - 5 <= numoffiles:
+            hovername = listy[level * 6 - 6]
+        elif mousepos[0] >= 400 and mousepos[0] <= 500 and mousepos[1] >= 100 and mousepos[1] <= 200 and level * 6 - 4 <= numoffiles:
+            hovername = listy[level * 6 - 5]
+        elif mousepos[0] >= 250 and mousepos[0] <= 350 and mousepos[1] >= 250 and mousepos[1] <= 350 and level * 6 - 3 <= numoffiles:
+            hovername = listy[level * 6 - 4]
+        elif mousepos[0] >= 100 and mousepos[0] <= 200 and mousepos[1] >= 400 and mousepos[1] <= 500 and level * 6 - 2 <= numoffiles:
+            hovername = listy[level * 6 - 3]
+        elif mousepos[0] >= 250 and mousepos[0] <= 350 and mousepos[1] >= 400 and mousepos[1] <= 500 and level * 6 - 1 <= numoffiles:
+            hovername = listy[level * 6 - 2]
+        elif mousepos[0] >= 400 and mousepos[0] <= 500 and mousepos[1] >= 400 and mousepos[1] <= 500 and level * 6 <= numoffiles:
+            hovername = listy[level * 6 - 1]
+        else:
+            hovername = ""
+        if hovername != "":
+            pygame.display.set_caption("Files - Screen "+str(level)+" - "+hovername)
+        else:
+            pygame.display.set_caption("Files - Screen "+str(level))
 
     # Settings
     if screen == "Settings":
@@ -564,6 +614,7 @@ while running:
                 filename = popup("What is the file name?")
                 while os.path.isdir(FilesPath+"/"+filename):
                     filename = popup("What is the file name?")
+                    filename += ".pixl"
                 file = open(filename,"w+")
                 file.write("Pixlr")
                 for x in color:
@@ -587,6 +638,7 @@ while running:
                 filename = popup("What is the file name?")
                 while os.path.isdir(FilesPath+"/"+filename):
                     filename = popup("What is the file name?")
+                    filename += ".pixl"
                 file = open(filename,"w+")
                 file.write("Pixlr")
                 for x in color:
