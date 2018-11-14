@@ -132,6 +132,16 @@ def openfile(filename):
     file.close()
     return lines
 
+def savefile(filedatas,filetypes,text=True):
+    if text == True:
+        filename = popup("What is the filename?")
+        while os.path.isdir(filename) != False:
+            filename = popup("What is the filename?")
+        filetype = ""
+        while filetype not in filetypes:
+            filetype = popup("What is the filetype? Posible Types..."+filetypes)
+        file
+
 def printer(text,lang=lang):
     print(translator.translate(text,dest=lang).text)
 
@@ -314,7 +324,7 @@ while running:
         window.blit(next_arrow,(400,250))
         # File Stuff
         if level * 6 - 5 <= numoffiles:
-            if listy[level * 6 - 6].endswith("pixl"):
+            if listy[level * 6 - 6].endswith(".pixl"):
                 lines = openfile(listy[level * 6 - 6])
                 pos = ((0,0),(75,0),(150,0),(225,0),(300,0),(375,0),(450,0),(525,0),(0,75),(75,75),(150,75),(225,75),(300,75),(375,75),(450,75),(525,75),(0,150),(75,150),(150,150),(225,150),(300,150),(375,150),(450,150),(525,150),(0,225),(75,225),(150,225),(225,225),(300,225),(375,225),(450,225),(525,225),(0,300),(75,300),(150,300),(225,300),(300,300),(375,300),(450,300),(525,300),(0,375),(75,375),(150,375),(225,375),(300,375),(375,375),(450,375),(525,375),(0,450),(75,450),(150,450),(225,450),(300,450),(375,450),(450,450),(525,450),(0,525),(75,525),(150,525),(225,525),(300,525),(375,525),(450,525),(525,525))
                 color = [[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0]]
@@ -327,7 +337,7 @@ while running:
             else:
                 window.blit(fileimg,blocks[1])
         if level * 6 - 4 <= numoffiles:
-            if listy[level * 6 - 5].endswith("pixl"):
+            if listy[level * 6 - 5].endswith(".pixl"):
                 lines = openfile(listy[level * 6 - 5])
                 pos = ((0,0),(75,0),(150,0),(225,0),(300,0),(375,0),(450,0),(525,0),(0,75),(75,75),(150,75),(225,75),(300,75),(375,75),(450,75),(525,75),(0,150),(75,150),(150,150),(225,150),(300,150),(375,150),(450,150),(525,150),(0,225),(75,225),(150,225),(225,225),(300,225),(375,225),(450,225),(525,225),(0,300),(75,300),(150,300),(225,300),(300,300),(375,300),(450,300),(525,300),(0,375),(75,375),(150,375),(225,375),(300,375),(375,375),(450,375),(525,375),(0,450),(75,450),(150,450),(225,450),(300,450),(375,450),(450,450),(525,450),(0,525),(75,525),(150,525),(225,525),(300,525),(375,525),(450,525),(525,525))
                 color = [[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0]]
@@ -340,7 +350,7 @@ while running:
             else:
                 window.blit(fileimg,blocks[2])
         if level * 6 - 3 <= numoffiles:
-            if listy[level * 6 - 4].endswith("pixl"):
+            if listy[level * 6 - 4].endswith(".pixl"):
                 lines = openfile(listy[level * 6 - 4])
                 pos = ((0,0),(75,0),(150,0),(225,0),(300,0),(375,0),(450,0),(525,0),(0,75),(75,75),(150,75),(225,75),(300,75),(375,75),(450,75),(525,75),(0,150),(75,150),(150,150),(225,150),(300,150),(375,150),(450,150),(525,150),(0,225),(75,225),(150,225),(225,225),(300,225),(375,225),(450,225),(525,225),(0,300),(75,300),(150,300),(225,300),(300,300),(375,300),(450,300),(525,300),(0,375),(75,375),(150,375),(225,375),(300,375),(375,375),(450,375),(525,375),(0,450),(75,450),(150,450),(225,450),(300,450),(375,450),(450,450),(525,450),(0,525),(75,525),(150,525),(225,525),(300,525),(375,525),(450,525),(525,525))
                 color = [[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0]]
@@ -353,7 +363,7 @@ while running:
             else:
                 window.blit(fileimg,blocks[4])
         if level * 6 - 2 <= numoffiles:
-            if listy[level * 6 - 3].endswith("pixl"):
+            if listy[level * 6 - 3].endswith(".pixl"):
                 lines = openfile(listy[level * 6 - 3])
                 pos = ((0,0),(75,0),(150,0),(225,0),(300,0),(375,0),(450,0),(525,0),(0,75),(75,75),(150,75),(225,75),(300,75),(375,75),(450,75),(525,75),(0,150),(75,150),(150,150),(225,150),(300,150),(375,150),(450,150),(525,150),(0,225),(75,225),(150,225),(225,225),(300,225),(375,225),(450,225),(525,225),(0,300),(75,300),(150,300),(225,300),(300,300),(375,300),(450,300),(525,300),(0,375),(75,375),(150,375),(225,375),(300,375),(375,375),(450,375),(525,375),(0,450),(75,450),(150,450),(225,450),(300,450),(375,450),(450,450),(525,450),(0,525),(75,525),(150,525),(225,525),(300,525),(375,525),(450,525),(525,525))
                 color = [[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0]]
@@ -366,7 +376,7 @@ while running:
             else:
                 window.blit(fileimg,blocks[6])
         if level * 6 - 1 <= numoffiles:
-            if listy[level * 6 - 2].endswith("pixl"):
+            if listy[level * 6 - 2].endswith(".pixl"):
                 lines = openfile(listy[level * 6 - 2])
                 pos = ((0,0),(75,0),(150,0),(225,0),(300,0),(375,0),(450,0),(525,0),(0,75),(75,75),(150,75),(225,75),(300,75),(375,75),(450,75),(525,75),(0,150),(75,150),(150,150),(225,150),(300,150),(375,150),(450,150),(525,150),(0,225),(75,225),(150,225),(225,225),(300,225),(375,225),(450,225),(525,225),(0,300),(75,300),(150,300),(225,300),(300,300),(375,300),(450,300),(525,300),(0,375),(75,375),(150,375),(225,375),(300,375),(375,375),(450,375),(525,375),(0,450),(75,450),(150,450),(225,450),(300,450),(375,450),(450,450),(525,450),(0,525),(75,525),(150,525),(225,525),(300,525),(375,525),(450,525),(525,525))
                 color = [[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0]]
@@ -379,7 +389,7 @@ while running:
             else:
                 window.blit(fileimg,blocks[7])
         if level * 6 - 0 <= numoffiles:
-            if listy[level * 6 - 1].endswith("pixl"):
+            if listy[level * 6 - 1].endswith(".pixl"):
                 lines = openfile(listy[level * 6 - 1])
                 pos = ((0,0),(75,0),(150,0),(225,0),(300,0),(375,0),(450,0),(525,0),(0,75),(75,75),(150,75),(225,75),(300,75),(375,75),(450,75),(525,75),(0,150),(75,150),(150,150),(225,150),(300,150),(375,150),(450,150),(525,150),(0,225),(75,225),(150,225),(225,225),(300,225),(375,225),(450,225),(525,225),(0,300),(75,300),(150,300),(225,300),(300,300),(375,300),(450,300),(525,300),(0,375),(75,375),(150,375),(225,375),(300,375),(375,375),(450,375),(525,375),(0,450),(75,450),(150,450),(225,450),(300,450),(375,450),(450,450),(525,450),(0,525),(75,525),(150,525),(225,525),(300,525),(375,525),(450,525),(525,525))
                 color = [[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0]]
@@ -407,52 +417,52 @@ while running:
                 pygame.time.wait(100)
         if mouseclicks[0] == True and mousepos[0] >= 250 and mousepos[0] <= 350 and mousepos[1] >= 100 and mousepos[1] <= 200 and rest == False:
             if level * 6 - 5 <= numoffiles and listy[level * 6 - 6].endswith("~") == False and os.path.isdir(listy[level * 6 - 6]) == False:
-                lines = openfile(listy[level * 6 - 6])
-                screen = lines[0]
-                editfile = str(listy[level * 6 - 6])
-                loaded = False
-                rest = True
-                pygame.time.wait(100)
+                if listy[level * 6 - 6].endswith(".pixl"):
+                    screen = "Pixlr"
+                    editfile = str(listy[level * 6 - 6])
+                    loaded = False
+                    rest = True
+                    pygame.time.wait(100)
         if mouseclicks[0] == True and mousepos[0] >= 400 and mousepos[0] <= 500 and mousepos[1] >= 100 and mousepos[1] <= 200 and rest == False:
             if level * 6 - 4 <= numoffiles and listy[level * 6 - 5].endswith("~") == False and os.path.isdir(listy[level * 6 - 5]) == False:
-                lines = openfile(listy[level * 6 - 5])
-                screen = lines[0]
-                editfile = str(listy[level * 6 - 5])
-                loaded = False
-                rest = True
-                pygame.time.wait(100)
+                if listy[level * 6 - 5].endswith(".pixl"):
+                    screen = "Pixlr"
+                    editfile = str(listy[level * 6 - 5])
+                    loaded = False
+                    rest = True
+                    pygame.time.wait(100)
         if mouseclicks[0] == True and mousepos[0] >= 250 and mousepos[0] <= 350 and mousepos[1] >= 250 and mousepos[1] <= 350 and rest == False:
             if level * 6 - 3 <= numoffiles and listy[level * 6 - 4].endswith("~") == False and os.path.isdir(listy[level * 6 - 4]) == False:
-                lines = openfile(listy[level * 6 - 4])
-                screen = lines[0]
-                editfile = str(listy[level * 6 - 4])
-                loaded = False
-                rest = True
-                pygame.time.wait(100)
+                if listy[level * 6 - 4].endswith(".pixl"):
+                    screen = "Pixlr"
+                    editfile = str(listy[level * 6 - 4])
+                    loaded = False
+                    rest = True
+                    pygame.time.wait(100)
         if mouseclicks[0] == True and mousepos[0] >= 100 and mousepos[0] <= 200 and mousepos[1] >= 400 and mousepos[1] <= 500 and rest == False:
             if level * 6 - 2 <= numoffiles and listy[level * 6 - 3].endswith("~") == False and os.path.isdir(listy[level * 6 - 3]) == False:
-                lines = openfile(listy[level * 6 - 3])
-                screen = lines[0]
-                editfile = str(listy[level * 6 - 3])
-                loaded = False
-                rest = True
-                pygame.time.wait(100)
+                if listy[level * 6 - 3].endswith(".pixl"):
+                    screen = "Pixlr"
+                    editfile = str(listy[level * 6 - 3])
+                    loaded = False
+                    rest = True
+                    pygame.time.wait(100)
         if mouseclicks[0] == True and mousepos[0] >= 250 and mousepos[0] <= 350 and mousepos[1] >= 400 and mousepos[1] <= 500 and rest == False:
             if level * 6 - 1 <= numoffiles and listy[level * 6 - 2].endswith("~") == False and os.path.isdir(listy[level * 6 - 2]) == False:
-                lines = openfile(listy[level * 6 - 2])
-                screen = lines[0]
-                editfile = str(listy[level * 6 - 2])
-                loaded = False
-                rest = True
-                pygame.time.wait(100)
+                if listy[level * 6 - 2].endswith(".pixl"):
+                    screen = "Pixlr"
+                    editfile = str(listy[level * 6 - 2])
+                    loaded = False
+                    rest = True
+                    pygame.time.wait(100)
         if mouseclicks[0] == True and mousepos[0] >= 400 and mousepos[0] <= 500 and mousepos[1] >= 400 and mousepos[1] <= 500 and rest == False:
             if level * 6 <= numoffiles and listy[level * 6 - 1].endswith("~") == False and os.path.isdir(listy[level * 6 - 1]) == False:
-                lines = openfile(listy[level * 6 - 1])
-                screen = lines[0]
-                editfile = str(listy[level * 6 - 1])
-                loaded = False
-                rest = True
-                pygame.time.wait(100)
+                if listy[level * 6 - 1].endswith(".pixl"):
+                    screen = "Pixlr"
+                    editfile = str(listy[level * 6 - 1])
+                    loaded = False
+                    rest = True
+                    pygame.time.wait(100)
         # Sets Screen Name
         if mousepos[0] >= 100 and mousepos[0] <= 200 and mousepos[1] >= 100 and mousepos[1] <= 200:
             hovername = "Back"
@@ -657,7 +667,41 @@ while running:
                     file.write(str(x))
                 file.close()
                 screen = "Home"
-                
+
+        # e
+        if buttons_pressed[101] == True and editfile != "":
+            exporttype = 0
+            exportloc = ""
+            while exporttype < 0 or exporttype > 1:
+                exporttype = popup("What type do you want to export to? (1 for Paletted Graphic)")
+            while os.path.isdir(exportloc) != True:
+                exportloc = popup("What is the export going to?")
+            if exporttype == 1:
+                originalcolors = []
+                locpalette = []
+                # Creating the Palette
+                for color in color:
+                    if color not in originalcolors:
+                        originalcolors.append(color)
+                        locpalette.append(len(originalcolors)-1)
+                    else:
+                        loopnum = 0
+                        for color2 in originalcolors:
+                            if color2 == color:
+                                locpalette.append(loopnum)
+                                break
+                            loopnum += 1
+                # Transfering to Hex
+                xloop = 0
+                yloop = 0
+                for color in originalcolors:
+                    for color2 in color:
+                        hex(color2).split('x')[-1]
+                        originalcolors[xloop][yloop]
+                        yloop += 1
+                    yloop = 0
+                    xloop += 1
+                # Writing the File
         # Curser Setting
         os.chdir(AppDataPath+"/pixlr")
         if tool == "Basic":
