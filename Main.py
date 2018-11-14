@@ -10,7 +10,7 @@ homepath = os.getcwd()
 
 account = input("Which account do you want? new for new account")
 
-#Creating a new account
+# Creating a new account
 if account == "new":
     newaccountname = input("What is the new account name?")
 if account == "new" and os.path.isdir(os.getcwd() + "/Files/" + newaccountname) == False:
