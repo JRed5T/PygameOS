@@ -1,10 +1,20 @@
 # Importing
-import pygame
+try:
+    import pygame
+except ImportError:
+    print("Pygame is required to run PygameOS.")
+    sys.exit()
 import os
 import ast
 import random
 import sys
-import googletrans
+googletransloaded = true
+try:
+    import googletrans
+except ImportError:
+    print("The translate feature requires the package googletrans.")
+    print("This program will still run though, but only in english.")
+    googletransloaded = false
 
 homepath = os.getcwd()
 
@@ -52,7 +62,8 @@ os.chdir(SettingsPath)
 file = open("lang","r")
 lang = file.read()
 file.close()
-translator = googletrans.Translator()
+if googletransloaded:
+    translator = googletrans.Translator()
 if loaded =="t":
     file = open("username","r")
     file.seek(0)
@@ -65,20 +76,33 @@ if loaded =="t":
     loop = True
     loopnum = 0
     while loop:
-        guess = [input(translator.translate("What is your username?",dest=lang).text),input(translator.translate("What is you password?",dest=lang).text)]
+        if googletransloaded:
+            guess = [input(translator.translate("What is your username?",dest=lang).text),input(translator.translate("What is you password?",dest=lang).text)]
+        else:
+            guess = [input("What is your username?"),input("What is you password?")]
         if guess == [username,password]:
             running = True
             loop = False
         else:
             loopnum += 1
-            print(translator.translate("Wrong username and/or password",dest=lang).text)
+            if googletransloaded:
+                print(translator.translate("Wrong username and/or password",dest=lang).text)
+            else:
+                print("Wrong username and/or password")
         if loopnum == 3:
-            print(translator.translate("You ran out of guesses.",dest=lang).text)
+            if googletransloaded:
+                print(translator.translate("You ran out of guesses.",dest=lang).text)
+            else:
+                print("You ran out of guesses.")
             loop = False
             running = False
 elif loaded == "f":
-    username = input(translator.translate("What do you want your username to be?",dest=lang).text)
-    password = input(translator.translate("What do you want your password to be?",dest=lang).text)
+    if googletransloaded:
+        username = input(translator.translate("What do you want your username to be?",dest=lang).text)
+        password = input(translator.translate("What do you want your password to be?",dest=lang).text)
+    else:
+        username = input("What do you want your username to be?")
+        password = input("What do you want your password to be?") 
     file = open("username","w+")
     file.write(username)
     file.close()
@@ -92,7 +116,10 @@ elif loaded == "f":
     file.seek(0)
     file.write("t")
     file.close()
-    sys.exit(translator.translate("You will have to restart the program to log in.",dest=lang).text)
+    if googletransloaded:
+        sys.exit(translator.translate("You will have to restart the program to log in.",dest=lang).text)
+    else:
+        sys.exit("You will have to restart the program to log in.")
 
 # Initalizing and Setting Up Pygame
 pygame.init()
@@ -143,11 +170,17 @@ def savefile(filedatas,filetypes,text=True):
         file
 
 def printer(text,lang=lang):
-    print(translator.translate(text,dest=lang).text)
+    if googletransloaded:
+        print(translator.translate(text,dest=lang).text)
+    else:
+        print(text)
 
 def popup(question,lang=lang):
-    question = translator.translate(question,dest=lang).text
-    return langsys.transto(input(question),"en")
+    if googletransloaded:
+        question = translator.translate(question,dest=lang).text
+        return langsys.transto(input(question),"en")
+    else:
+        return input(question)
 
 class music():
     def playeffect(path,sound):
@@ -184,11 +217,17 @@ class bank():
 
 class langsys():
     def transto(text,lang):
-        transtext = translator.translate(text,dest=lang)
-        return transtext.text
+        if googletransloaded:
+            transtext = translator.translate(text,dest=lang)
+            return transtext.text
+        else:
+            return text
     def detectlang(text):
-        translang = translator.detect(text)
-        return translang.lang
+        if googletransloaded:
+            translang = translator.detect(text)
+            return translang.lang
+        else:
+            return text
 
 def tsplit(s, sep):
     stack = [s]
