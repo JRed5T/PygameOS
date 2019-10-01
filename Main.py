@@ -8,13 +8,13 @@ import os
 import ast
 import random
 import sys
-googletransloaded = true
+googletransloaded = True
 try:
     import googletrans
 except ImportError:
     print("The translate feature requires the package googletrans.")
     print("This program will still run though, but only in english.")
-    googletransloaded = false
+    googletransloaded = False
 
 homepath = os.getcwd()
 
