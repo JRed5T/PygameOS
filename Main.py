@@ -20,11 +20,15 @@ homepath = os.getcwd()
 
 account = input("Which account do you want? new for new account")
 
+# Checking for Files Folder
+if os.path.isdir(os.getcwd() + "/Files/") == False:
+    os.mkdir(homepath + "/Files")
+
 # Creating a new account
 if account == "new":
     newaccountname = input("What is the new account name?")
 if account == "new" and os.path.isdir(os.getcwd() + "/Files/" + newaccountname) == False:
-    UserPath = os.getcwd() + "/Files/" + newaccountname
+    UserPath = homepath + "/Files/" + newaccountname
     os.mkdir(UserPath)
     os.mkdir(UserPath+"/Files")
     os.mkdir(UserPath+"/Settings")
