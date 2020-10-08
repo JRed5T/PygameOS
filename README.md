@@ -1,7 +1,7 @@
 # PygameOS
 A Fake OS made in pygame.
 ![License](https://img.shields.io/github/license/JRedOW/PygameOS?color=orange&style=plastic)
-![Version](https://img.shields.io/github/v/release/JRedOW/PygameOS?color=orange&style=plastic)
+![Version](https://img.shields.io/github/v/release/JRedOW/PygameOS?color=orange&style=plastic&include_prereleases)
 
 ### Deprecated
 This project in no longer in development.  It was horribly coded in a language I rarely use now.  I don't even think it works.  If anyone cares enough to make a pull request, I will probably accept it.
